@@ -1,11 +1,14 @@
 # Task 03: Interactive Quiz Game Application
 ### Web Development Internship Project Submission
 
-![ApexQuiz Preview](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Click_Here_to_Play-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://chandankumarmandal8294.github.io/QuizGameApplication/)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript ES6+](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero_External-brightgreen?style=for-the-badge)
+
+> 🌐 **Live Application URL**: **[https://chandankumarmandal8294.github.io/QuizGameApplication/](https://chandankumarmandal8294.github.io/QuizGameApplication/)**
+
 
 ---
 
