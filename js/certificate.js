@@ -79,10 +79,10 @@ class CertificateGenerator {
             <div class="cert-footer">
               <div class="cert-sign-col">
                 <div class="cert-signature-line">
-                  <span class="sig-script">Antigravity AI</span>
+                  <span class="sig-script" id="cert-signatory-name">Technical Mentor</span>
                 </div>
-                <div class="cert-sign-title">Automated Assessment Engine</div>
-                <div class="cert-sign-sub">Internship Evaluation Platform</div>
+                <div class="cert-sign-title">Internship Assessment Board</div>
+                <div class="cert-sign-sub">Technical Evaluation Authority</div>
               </div>
 
               <div class="cert-seal-col">
@@ -118,7 +118,12 @@ class CertificateGenerator {
               <div class="cert-edit-name-wrap">
                 <label for="input-edit-cert-name">Candidate Name:</label>
                 <input type="text" id="input-edit-cert-name" value="${candidateName}" class="cert-input-name" placeholder="Enter Full Name" />
-                <button class="btn btn-sm btn-secondary" id="btn-update-cert-name">Update Name</button>
+                <button class="btn btn-sm btn-secondary" id="btn-update-cert-name">Update</button>
+              </div>
+              <div class="cert-edit-name-wrap">
+                <label for="input-edit-cert-sign">Signatory:</label>
+                <input type="text" id="input-edit-cert-sign" value="Technical Mentor" class="cert-input-name" placeholder="Mentor Name" />
+                <button class="btn btn-sm btn-secondary" id="btn-update-cert-sign">Update</button>
               </div>
               <div class="cert-actions-group">
                 <button class="btn btn-primary" id="btn-print-certificate">
@@ -157,6 +162,21 @@ class CertificateGenerator {
       updateNameBtn.addEventListener('click', applyName);
       inputName.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') applyName();
+      });
+
+      // Update Signatory Name
+      const updateSignBtn = document.getElementById('btn-update-cert-sign');
+      const inputSign = document.getElementById('input-edit-cert-sign');
+      const signDisplay = document.getElementById('cert-signatory-name');
+
+      const applySign = () => {
+        const val = inputSign.value.trim() || 'Technical Mentor';
+        signDisplay.textContent = val;
+      };
+
+      updateSignBtn?.addEventListener('click', applySign);
+      inputSign?.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') applySign();
       });
     }
   }
