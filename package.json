@@ -1,0 +1,19 @@
+{
+  "name": "quiz-game-application",
+  "version": "1.0.0",
+  "description": "Interactive Quiz Game Application - Internship Task 03",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "npx serve -l 3000 ."
+  },
+  "keywords": [
+    "quiz",
+    "internship-project",
+    "javascript",
+    "interactive-quiz",
+    "game"
+  ],
+  "author": "Internship Candidate",
+  "license": "MIT"
+}

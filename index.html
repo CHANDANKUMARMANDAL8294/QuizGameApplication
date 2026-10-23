@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexQuiz - Task 03 Quiz Game Application | Internship Assessment</title>
+  <meta name="description" content="A feature-rich interactive quiz game application built for Internship Task 03. Supports single-choice, multi-select, fill in the blanks, countdown timers, lifelines, and certificate generation.">
+  <meta name="keywords" content="quiz game, internship task, interactive quiz, javascript quiz, web development internship">
+  <meta name="author" content="Internship Candidate">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="ApexQuiz - Interactive Quiz Game Application">
+  <meta property="og:description" content="Internship Task 03 Quiz Game featuring multi-type questions, live countdown, lifelines, sound synthesizer, and verified certificate generation.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon SVG Data URI -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/%3E%3C/svg%3E">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header & Navigation -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="brand-logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <h1>ApexQuiz <span class="header-badge-tag">TASK 03 • INTERNSHIP</span></h1>
+          <p class="brand-sub">Interactive Multi-Format Assessment Platform</p>
+        </div>
+      </div>
+
+      <nav class="header-controls">
+        <button class="btn btn-secondary btn-sm" id="btn-open-project-info" title="View Internship Project Report & Documentation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Project Report
+        </button>
+
+        <button class="btn btn-secondary btn-sm" id="btn-open-leaderboard" title="View Global Leaderboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-2.34"></path><path d="M18 14.66V17c0 .55-.45 1-1 1h-2c-.55 0-1-.45-1-1v-2.34"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+          Leaderboard
+        </button>
+
+        <button class="btn-icon" id="sound-toggle-btn" title="Toggle Sound FX">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        </button>
+      </nav>
+    </header>
+
+    <main id="app-main-viewport">
+      <!-- ==================== SCREEN 1: SETUP & CONFIG ==================== -->
+      <section class="screen active" id="screen-setup">
+        <div class="setup-hero">
+          <h2>Master Your Knowledge</h2>
+          <p>Test your skills across programming, web architecture, and computer science with real-time feedback, lifelines, and verified certification.</p>
+        </div>
+
+        <div class="setup-grid">
+          <!-- Configuration Card 1: Player & Category -->
+          <article class="glass-panel config-card">
+            <h3 class="config-card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Candidate & Category
+            </h3>
+
+            <div class="form-group">
+              <label for="player-name-input">Candidate Full Name:</label>
+              <input type="text" id="player-name-input" class="form-control" placeholder="Enter your full name" value="Internship Candidate" />
+            </div>
+
+            <div class="form-group">
+              <label for="select-category">Quiz Topic / Domain:</label>
+              <select id="select-category" class="form-control">
+                <option value="all" selected>All Domains (Mixed Bag)</option>
+                <option value="webdev">💻 Full-Stack Web Development</option>
+                <option value="cs">🧠 Computer Science & Data Structures</option>
+                <option value="tech">⚡ Modern Tech & AI Trivia</option>
+                <option value="general">🚀 Science & General Trivia</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="select-difficulty">Difficulty Level:</label>
+              <select id="select-difficulty" class="form-control">
+                <option value="all" selected>Adaptive / All Difficulties</option>
+                <option value="easy">Easy (100 pts per question)</option>
+                <option value="medium">Medium (150 pts per question)</option>
+                <option value="hard">Hard (200 pts per question)</option>
+              </select>
+            </div>
+          </article>
+
+          <!-- Configuration Card 2: Question Type & Game Mode -->
+          <article class="glass-panel config-card">
+            <h3 class="config-card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-cyan)" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              Format & Game Mode
+            </h3>
+
+            <div class="form-group">
+              <label for="select-type">Question Type Filter:</label>
+              <select id="select-type" class="form-control">
+                <option value="all" selected>All Formats (Single, Multi, Fill, T/F)</option>
+                <option value="single">Single Choice (Multiple Choice)</option>
+                <option value="multi">Multi-Select (Checkboxes)</option>
+                <option value="fill">Fill in the Blank</option>
+                <option value="boolean">True / False Decisions</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="select-mode">Game Mode:</label>
+              <select id="select-mode" class="form-control">
+                <option value="classic" selected>⏱️ Classic Mode (Timed Assessment)</option>
+                <option value="survival">❤️ Survival Mode (3 Lives Only)</option>
+                <option value="blitz">⚡ Blitz Mode (Fast-Paced Speed Run)</option>
+                <option value="practice">🎓 Practice Mode (Untimed & Explanations)</option>
+              </select>
+            </div>
+
+            <div class="form-row" style="display: flex; gap: 0.75rem;">
+              <div class="form-group" style="flex: 1;">
+                <label for="select-count">Questions:</label>
+                <select id="select-count" class="form-control">
+                  <option value="5">5 Questions</option>
+                  <option value="10" selected>10 Questions</option>
+                  <option value="15">15 Questions</option>
+                  <option value="20">20 Questions</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="flex: 1;">
+                <label for="select-timer">Timer / Q:</label>
+                <select id="select-timer" class="form-control">
+                  <option value="15">15 Seconds</option>
+                  <option value="25" selected>25 Seconds</option>
+                  <option value="40">40 Seconds</option>
+                </select>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="setup-action-bar">
+          <button class="btn btn-primary btn-lg" id="btn-start-quiz">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            Launch Quiz Assessment
+          </button>
+
+          <div class="custom-status-row">
+            <button class="btn btn-secondary btn-sm" id="btn-open-custom-creator">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Custom Question
+            </button>
+            <span class="custom-count-badge" id="custom-questions-badge">0 Custom Questions Available</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SCREEN 2: QUIZ ARENA ==================== -->
+      <section class="screen" id="screen-quiz">
+        <!-- Live HUD Bar -->
+        <header class="quiz-hud">
+          <div class="hud-left">
+            <div class="hud-progress-info">
+              <span class="hud-progress-title" id="hud-progress-text">Question 1 of 10</span>
+              <div class="hud-progress-track">
+                <div class="hud-progress-fill" id="hud-progress-fill"></div>
+              </div>
+            </div>
+
+            <div id="hud-lives-container" class="hud-lives-container" style="display: none;">
+              <!-- Survival hearts rendered dynamically -->
+            </div>
+          </div>
+
+          <div class="hud-center">
+            <div class="hud-score-display">
+              <span class="hud-score-label">Score</span>
+              <span class="hud-score-value" id="hud-score-value">0</span>
+              <span class="points-floating-tag" id="points-floating-tag">+100 pts!</span>
+            </div>
+            <div id="hud-streak-container" style="display: none;"></div>
+          </div>
+
+          <div class="hud-right">
+            <!-- SVG Circular Timer -->
+            <div class="timer-container" id="timer-container">
+              <svg class="timer-svg" viewBox="0 0 76 76">
+                <circle class="timer-bg-circle" cx="38" cy="38" r="34" />
+                <circle class="timer-progress-circle" id="timer-svg-circle" cx="38" cy="38" r="34" />
+              </svg>
+              <span class="timer-seconds-display" id="timer-seconds-text">25</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Lifelines Bar -->
+        <div class="lifelines-bar">
+          <button class="btn-lifeline" id="btn-lifeline-5050" title="Eliminate 2 wrong answers (Single choice only)">
+            <span>⚡ 50:50 Eliminator</span>
+          </button>
+          <button class="btn-lifeline" id="btn-lifeline-time" title="Add +15 seconds to countdown">
+            <span>⏳ +15s Extra Time</span>
+          </button>
+          <button class="btn-lifeline" id="btn-lifeline-hint" title="Reveal a conceptual clue">
+            <span>💡 Smart Hint</span>
+          </button>
+          <button class="btn-lifeline" id="btn-lifeline-skip" title="Pass this question without penalty">
+            <span>⏩ Skip Question</span>
+          </button>
+        </div>
+
+        <!-- Question Card -->
+        <article class="glass-panel question-card">
+          <div class="question-header">
+            <div class="question-tags-group">
+              <span class="q-category-tag" id="q-category-badge">💻 Web Dev</span>
+              <span class="q-type-tag" id="q-type-badge">Single Choice</span>
+            </div>
+            <span class="badge badge-medium" id="q-difficulty-badge">MEDIUM • 150 PTS</span>
+          </div>
+
+          <h2 class="question-title" id="q-title-text">Question text will load here...</h2>
+
+          <!-- Optional Code Snippet Block -->
+          <div class="question-code-box" id="q-code-snippet" style="display: none;">
+            <code>// Code block</code>
+          </div>
+
+          <!-- Dynamic Hint Box -->
+          <div class="hint-card" id="q-hint-card" style="display: none;"></div>
+
+          <!-- Answer Options Container (Single, Multi, Fill, Boolean) -->
+          <div id="q-options-container"></div>
+
+          <!-- Feedback & Explanation Card (shown after answering) -->
+          <div class="explanation-card" id="q-explanation-card" style="display: none;"></div>
+
+          <!-- Action Footer -->
+          <div class="quiz-action-footer">
+            <button class="btn btn-primary" id="btn-next-question" style="display: none;">
+              Next Question ➔
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <!-- ==================== SCREEN 3: RESULTS & ANALYTICS ==================== -->
+      <section class="screen" id="screen-result">
+        <article class="glass-panel results-hero-card">
+          <span class="results-hero-badge">Assessment Completed</span>
+          <h2 class="results-title">Quiz Performance Summary</h2>
+
+          <div class="result-grade-badge grade-s" id="res-grade-badge">
+            S-Rank Distinction 🏆
+          </div>
+
+          <div class="results-stats-grid">
+            <div class="result-stat-card">
+              <div class="result-stat-val" id="res-score-number">0</div>
+              <div class="result-stat-label">Total Points</div>
+            </div>
+            <div class="result-stat-card">
+              <div class="result-stat-val" id="res-accuracy-number">0%</div>
+              <div class="result-stat-label">Accuracy Rate</div>
+            </div>
+            <div class="result-stat-card">
+              <div class="result-stat-val" id="res-correct-number">0 / 0</div>
+              <div class="result-stat-label">Correct Answers</div>
+            </div>
+            <div class="result-stat-card">
+              <div class="result-stat-val" id="res-streak-number">0x</div>
+              <div class="result-stat-label">Best Streak</div>
+            </div>
+          </div>
+
+          <div class="results-buttons-row">
+            <button class="btn btn-primary" id="btn-view-certificate">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+              Generate Internship Certificate
+            </button>
+            <button class="btn btn-secondary" id="btn-play-again">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              Retry Quiz
+            </button>
+            <button class="btn btn-secondary" id="btn-change-settings">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              Customize Setup
+            </button>
+          </div>
+        </article>
+
+        <!-- Detailed Question Review List -->
+        <section class="review-section">
+          <div class="review-section-header">
+            <h3>Detailed Question Breakdown & Explanations</h3>
+            <div class="review-filters-group">
+              <button class="review-filter-btn active" data-filter="all">All Questions</button>
+              <button class="review-filter-btn" data-filter="wrong">Incorrect Only</button>
+              <button class="review-filter-btn" data-filter="correct">Correct Only</button>
+            </div>
+          </div>
+
+          <div id="review-items-container">
+            <!-- Review items inserted dynamically -->
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <!-- Modals Mount Points -->
+    <div id="leaderboard-modal-container"></div>
+    <div id="project-info-modal-container"></div>
+    <div id="custom-creator-modal-container"></div>
+    <div id="certificate-modal-container"></div>
+  </div>
+
+  <!-- Application Logic Modules -->
+  <script src="js/audio.js"></script>
+  <script src="js/confetti.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/certificate.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
